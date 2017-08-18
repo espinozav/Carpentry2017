@@ -34,8 +34,7 @@ summary(surveys$weight)
 
 ##plot 
 
-plot(surveys$year,surveys$weight) 
-plot(surveys$hindfoot_length,surveys$weight)
+plot(surveys$year,surveys$weight) #plotting (x,y) variables
 
 #explore the month with histograms
 summary(surveys$month)
