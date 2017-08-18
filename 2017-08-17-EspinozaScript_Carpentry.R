@@ -69,10 +69,13 @@ nrow(surveys[surveys$month==1, ]) #give me the number of rows for the month of 1
 length(which(surveys$month < 3)) #give me the length (ie how many rows) of the month values less than 3 
 summary(as.factor(surveys$month)) #give me the number of rows for all the months 
 
+##########################################
+#### END OF DAY 1 DATA WORKSHOP###########
+##########################################
+####STARTING DAY 2 of WORKSHOP###########
+####August 18,2017- Day 2 ###############
 #########################################
-#### END OF DAY 1 DATA WORKSHOP##########
-#########################################
-#August 18,2017- Day 2 
+
 surveys <- read.csv("data/portal_data_joined.csv") #reading in the data 
 
 install.packages("tidyverse") #instal tidyverse
@@ -96,6 +99,27 @@ surveys_SML <- surveys  %>%
   select(year, plot_id, species_id, weight)
 
 head(surveys_SML) #check the first 6 rows of the new dataset
+
+##mutate 
+surveys %>% 
+  filter(!is.na(weight)) %>%  #remove NAs 
+  mutate(weight_kg=weight / 1000, 
+         weight_kg2= weight_kg*2) %>%  ##the new column is being mutated to kg
+  head#we can pipe the tail function without havig to use parenthesis! 
+
+##Challenge
+##Create a new data frame from the surveys data that meets the following
+##criteria: contains only the species_id column and a new column called
+##hindfoot_half containing values that are half the hindfoot_lengthvalues. In
+##this hindfoot_half column, there are there are no NAs and all values are less than 30 
+
+surveys_hf <- surveys %>% 
+  select(species_id, hindfoot_length) %>% 
+  mutate(hindfoot_length2=hindfoot_length / 2) %>% 
+  filter(hindfoot_length2<30) %>% 
+  filter(!is.na(hindfoot_length2)) #%>% 
+#head 
+
 
 
 
