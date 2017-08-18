@@ -67,10 +67,10 @@ nrow(surveys[surveys$month==1 | surveys$month == 2, ])  #give me the number of r
 nrow(surveys[surveys$month==1, ]) #give me the number of rows for the month of 1 
 (summary(surveys$month <3)) #true or false for the month less than March 
 (summary(surveys$month==1)) #this is the true or false for Jan
-(summary(surveys$month==2)) #this is the true or false for Feb
 length(which(surveys$month < 3)) #give me the length (ie how many rows) of the month values less than 3 
 summary(as.factor(surveys$month)) #give me the number of rows for all the months 
 
 #########################################
 #### END OF DAY 1 DATA WORKSHOP##########
 #########################################
+#August 18,2017- Day 2 
