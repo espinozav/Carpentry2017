@@ -132,7 +132,10 @@ male_female <- surveys %>%
   filter(!is.na(weight), 
          sex=="F" | sex =="M") %>% 
   group_by(sex, species_id) %>% 
-  summarize(mean_weight= mean(weight, na.rm =TRUE ))  #R returns NA if not removed from the mean 
-
-
+  summarize(mean_weight= mean(weight),
+            min_weight=min(weight))# can do the removal of the NA within the function to reduce key stroke --> ,na.rm =TRUE ))  #R returns NA if not removed from the mean 
+#total count of number of males and females -->use tally
+  surveys %>% 
+  group_by(sex) %>% 
+    tally 
 
