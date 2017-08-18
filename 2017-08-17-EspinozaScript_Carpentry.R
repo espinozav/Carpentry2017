@@ -92,7 +92,7 @@ filter(surveys, year ==1995)
 ##want rows for 1995 and select id 
 
 ##pipes! it's like connections between functions 
-%>%  #command shift m 
+#%>%  #command shift m 
   
 surveys_SML <- surveys  %>% 
   filter(year ==1995) %>% 
@@ -107,7 +107,7 @@ surveys %>%
          weight_kg2= weight_kg*2) %>%  ##the new column is being mutated to kg
   head#we can pipe the tail function without havig to use parenthesis! 
 
-##Challenge
+##Challenge 1
 ##Create a new data frame from the surveys data that meets the following
 ##criteria: contains only the species_id column and a new column called
 ##hindfoot_half containing values that are half the hindfoot_lengthvalues. In
@@ -139,3 +139,35 @@ male_female <- surveys %>%
   group_by(sex) %>% 
     tally 
 
+  
+  ## Challenge2
+  
+  ## 1. How many individuals were caught in each plot_type surveyed?
+  
+  ## 2. Use group_by() and summarize() to find the mean, min, and 
+  ## max hindfoot length for each species (using species_id).
+ 
+  ## 3. What was the heaviest animal measured in each year? Return
+  ## the columns year, genus, species_id, and weight.
+  challenge3 <- surveys %>% 
+    select(year, genus, species,weight) %>% 
+    group_by(year) %>% 
+    top_n(1,weight) #within year year give me the highet value of 1 
+  
+  #or this example
+  challenge3part2 <- surveys %>%
+    filter(!is.na(weight)) %>% 
+    group_by(year) %>% 
+    filter(weight == max(weight)) %>% 
+    select(year, genus, species, weight) %>% 
+    arrange(year) #oranize the data frame by year 
+    
+  ## 4. You saw above how to count the number of individuals of each sex using a
+  ## combination of group_by() and tally(). How could you get the same result using
+  ## group_by() and summarize()? Hint: see ?n.
+  
+  surveys %>%
+    group_by(sex) %>% 
+    summarise(n())
+  
+  ###Visualization 
