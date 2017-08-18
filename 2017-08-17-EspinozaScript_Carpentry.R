@@ -120,6 +120,10 @@ surveys_hf <- surveys %>%
   filter(!is.na(hindfoot_length2)) #%>% 
 #head 
 
-
+##improvement 
+surveys_hf <- surveys %>% 
+  select(species_id, hindfoot_length) %>% 
+  mutate(hindfoot_length2=hindfoot_length / 2) %>% 
+  filter(hindfoot_length2<30,(!is.na(hindfoot_length2)) 
 
 
