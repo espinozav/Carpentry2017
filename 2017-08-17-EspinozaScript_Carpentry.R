@@ -73,3 +73,29 @@ summary(as.factor(surveys$month)) #give me the number of rows for all the months
 #### END OF DAY 1 DATA WORKSHOP##########
 #########################################
 #August 18,2017- Day 2 
+surveys <- read.csv("data/portal_data_joined.csv") #reading in the data 
+
+install.packages("tidyverse") #instal tidyverse
+library(tidyverse) #check if tidyverse is in my packages library 
+
+#dplyr package that deals with filter, select, mutate, ,summaries 
+
+#select columns from the surveys dataset 
+select(surveys, plot_id, species_id, weight) #same as line 61 but human readable 
+
+##using filter to slect rows where year is 1995 
+filter(surveys, year ==1995) 
+
+##want rows for 1995 and select id 
+
+##pipes! it's like connections between functions 
+%>%  #command shift m 
+  
+surveys_SML <- surveys  %>% 
+  filter(year ==1995) %>% 
+  select(year, plot_id, species_id, weight)
+
+head(surveys_SML) #check the first 6 rows of the new dataset
+
+
+
