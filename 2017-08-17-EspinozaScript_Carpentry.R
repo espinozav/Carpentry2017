@@ -70,7 +70,7 @@ length(which(surveys$month < 3)) #give me the length (ie how many rows) of the m
 summary(as.factor(surveys$month)) #give me the number of rows for all the months 
 
 ##########################################
-#### END OF DAY 1 DATA WORKSHOP###########
+#### END OF DAY 1 DATA WORKSHOP###########----
 ##########################################
 ####STARTING DAY 2 of WORKSHOP###########
 ####August 18,2017- Day 2 ###############
@@ -107,7 +107,7 @@ surveys %>%
          weight_kg2= weight_kg*2) %>%  ##the new column is being mutated to kg
   head#we can pipe the tail function without havig to use parenthesis! 
 
-##Challenge 1
+##Challenge 1 ----
 ##Create a new data frame from the surveys data that meets the following
 ##criteria: contains only the species_id column and a new column called
 ##hindfoot_half containing values that are half the hindfoot_lengthvalues. In
@@ -137,10 +137,9 @@ male_female <- surveys %>%
 #total count of number of males and females -->use tally
   surveys %>% 
   group_by(sex) %>% 
-    tally 
-
+    tally
   
-  ## Challenge2
+  ## Challenge2----
   
   ## 1. How many individuals were caught in each plot_type surveyed?
   
@@ -152,7 +151,7 @@ male_female <- surveys %>%
   challenge3 <- surveys %>% 
     select(year, genus, species,weight) %>% 
     group_by(year) %>% 
-    top_n(1,weight) #within year year give me the highet value of 1 
+    top_n(1,weight)#within year year give me the highet value of 1 
   
   #or this example
   challenge3part2 <- surveys %>%
@@ -170,4 +169,48 @@ male_female <- surveys %>%
     group_by(sex) %>% 
     summarise(n())
   
-  ###Visualization 
+  ###Exporting Data ----
+  surveys_complete <- surveys %>% #this method is super redundant 
+    filter(species_id !="") #remove missing species ID 
+    filter(!is.na(weight)) %>% 
+    filter(!is.na(hindfoot_length)) %>% 
+    filter(sex !="")
+    
+    #this is the cleaner, shorter alternative
+    surveys_complete <- surveys %>%   
+    filter(species_id !="",
+           !is.na(weight),
+           !is.na(hindfoot_length),
+                  sex !="")
+    
+##Extract the most common species_id
+    species_counts <- surveys_complete %>% 
+      group_by(species_id) %>% 
+      tally %>% 
+      filter(n >=50)
+##Only keep the most common species 
+    survey_comm_sp <- surveys_complete
+    filter(species_id %in% species_counts$species_id)
+    species_counts$species_id
+    write.csv(survey_comm_sp, file="data_output/surveys_complete.csv") #save the data output as csv 
+    
+    
+    
+    
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
