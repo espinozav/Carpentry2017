@@ -125,5 +125,14 @@ surveys_hf <- surveys %>%
   select(species_id, hindfoot_length) %>% 
   mutate(hindfoot_length2=hindfoot_length / 2) %>% 
   filter(hindfoot_length2<30,(!is.na(hindfoot_length2)) 
+         
+##what is the average weight for males and females ?
+##learning to use group_by and summarize 
+male_female <- surveys %>% 
+  filter(!is.na(weight), 
+         sex=="F" | sex =="M") %>% 
+  group_by(sex, species_id) %>% 
+  summarize(mean_weight= mean(weight, na.rm =TRUE ))  #R returns NA if not removed from the mean 
+
 
 
