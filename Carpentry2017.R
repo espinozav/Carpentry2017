@@ -51,7 +51,7 @@ yearly_weight <- surveys_complete %>%
   summarise(avg_weight=mean(weight)) %>% 
   tally
 
-##assigning plot to myplot variable 
+##assigning plot to myplot object
 myplot <- ggplot(data = yearly_weight, 
        aes(x = year, y = n, color = species_id)) +
   geom_line()+
